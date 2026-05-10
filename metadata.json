@@ -1,0 +1,10 @@
+{
+  "name": "Remix: The Way of Sound v3",
+  "description": "High-fidelity audio-visual storytelling engine. Combines real-time visualization with a frame-accurate offline MP4 rendering system powered by FFmpeg.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera",
+    "display-capture"
+  ],
+  "majorCapabilities": []
+}

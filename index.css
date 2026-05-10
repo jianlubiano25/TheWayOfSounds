@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+.cursor-none-all, .cursor-none-all * {
+    cursor: none !important;
+}
+body {
+    background-color: #000;
+    color: #fff;
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Sorts Mill Goudy', 'Goudy Old Style', Garamond, serif;
+}
+.goudy {
+    font-family: 'Sorts Mill Goudy', 'Goudy Old Style', Garamond, serif;
+}
+/* Custom scrollbar for minimalist look */
+::-webkit-scrollbar {
+    width: 4px;
+}
+::-webkit-scrollbar-track {
+    background: #000;
+}
+::-webkit-scrollbar-thumb {
+    background: #333;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
