@@ -1,5 +1,6 @@
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { toBlobURL } from '@ffmpeg/util';
+// @ts-ignore
 import classWorkerURL from '@ffmpeg/ffmpeg/worker?url';
 
 let ffmpeg: FFmpeg | null = null;
