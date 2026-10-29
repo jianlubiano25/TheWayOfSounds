@@ -18,13 +18,14 @@ export const Controls: React.FC<ControlsProps> = ({
   return (
     <div className="flex flex-col items-center space-y-6 select-none" style={{ color: uiColor }}>
       {/* Primary Audio Source */}
-      <div className="flex items-center space-x-12">
+      <div className="flex items-center space-x-8">
+        {/* Single File Upload */}
         <div className="relative group">
           <input 
             type="file" 
             accept="audio/*" 
             onChange={onFileUpload} 
-            className="absolute inset-0 opacity-0 cursor-pointer w-full"
+            className="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10"
           />
           <button 
             className={`text-[11px] tracking-[0.2em] uppercase transition-all duration-500 border-b pb-1 ${
@@ -33,7 +34,25 @@ export const Controls: React.FC<ControlsProps> = ({
                 : 'border-transparent opacity-40 group-hover:opacity-100'
             }`}
           >
-            {activeSource === AudioSourceType.FILE ? 'Change File' : 'Upload Audio'}
+            Upload Audio
+          </button>
+        </div>
+
+        <span className="opacity-20 text-[10px]">|</span>
+
+        {/* Multiple Files Upload */}
+        <div className="relative group">
+          <input 
+            type="file" 
+            accept="audio/*" 
+            multiple
+            onChange={onFileUpload} 
+            className="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10"
+          />
+          <button 
+            className="text-[11px] tracking-[0.2em] uppercase transition-all duration-500 border-b pb-1 border-transparent opacity-40 group-hover:opacity-100"
+          >
+            Upload Multiple
           </button>
         </div>
 

@@ -1,7 +1,7 @@
 
 import React, { useRef, useEffect } from 'react';
 import { VisualizerVariation, VisualizerSettings } from '../types';
-import { initParticles, initRainDrops, renderFrame, Particle, RainDrop } from '../lib/visualizer-logic';
+import { initParticles, initRainDrops, renderFrame, Particle, RainDrop } from '../lib/visualizer-logic-optimized';
 
 interface VisualizerProps {
   analyzer: AnalyserNode | null;
@@ -16,6 +16,7 @@ export const Visualizer: React.FC<VisualizerProps> = ({ analyzer, variation, set
   const animationRef = useRef<number | undefined>(undefined);
   const particlesRef = useRef<Particle[]>([]);
   const rainDropsRef = useRef<RainDrop[]>([]);
+  const bucketsRef = useRef<Map<string, any>>(new Map()); // Reusable bucket cache for particle batching
   
   const mouseRef = useRef({ x: 0, y: 0, active: false });
   const easedMouseRef = useRef({ x: 0, y: 0 });
@@ -72,6 +73,9 @@ export const Visualizer: React.FC<VisualizerProps> = ({ analyzer, variation, set
     resize();
 
     const render = (timestamp: number) => {
+      if (isStudioRendering) {
+        return;
+      }
       const time = analyzer ? analyzer.context.currentTime : timestamp * 0.001;
       
       const dpr = window.devicePixelRatio || 1;
@@ -118,7 +122,8 @@ export const Visualizer: React.FC<VisualizerProps> = ({ analyzer, variation, set
         height,
         particlesRef.current,
         rainDropsRef.current,
-        easedMouseRef.current
+        easedMouseRef.current,
+        bucketsRef.current // Pass reusable buckets
       );
 
       animationRef.current = requestAnimationFrame(render);
